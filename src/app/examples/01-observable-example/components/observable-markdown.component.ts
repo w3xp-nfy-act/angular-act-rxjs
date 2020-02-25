@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from '../../../shared/services';
 
 @Component({
   selector: 'app-observable-markdown',
@@ -12,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
   <markdown [data]="markup"></markdown>
 
   <!-- loaded from remote url -->
-  <markdown [src]="'./assets/md/observable.md'"></markdown>
+  <markdown [src]="'./assets/md/observable.md'" (load)="onLoad($event)" (error)="onError($event)"></markdown>
   `,
   styles: [`
   p {
@@ -24,7 +25,7 @@ import { Component, OnInit } from '@angular/core';
 export class ObservableArticleMarkdownComponent implements OnInit {
   markup: any;
 
-  constructor() {
+  constructor(public loadingService: LoadingService) {
     this.markup = `
       * See:
       [Website](https://rxjs-dev.firebaseapp.com/guide/overview)
@@ -44,4 +45,16 @@ export class ObservableArticleMarkdownComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  public onLoad($event) {
+    console.log('Observable-Markdown 01:  onLoad')
+    
+    setTimeout(() => {
+        this.loadingService.showLoader();
+    }, 0);
+}
+
+public onError($event) {
+    console.log('Observable-Markdown 01: onError');
+}
 }

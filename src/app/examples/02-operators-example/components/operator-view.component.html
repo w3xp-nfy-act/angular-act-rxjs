@@ -1,4 +1,7 @@
 <article class="markdown-body">
     <h1>RxJS Operators</h1>
     <app-operator-markdown></app-operator-markdown>
+    <ng-template [ngIf]="loadingService.isLoading() | async">
+        <!-- more elements -->
+    </ng-template>
 </article>

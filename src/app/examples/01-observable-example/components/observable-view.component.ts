@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from '../../../shared/services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,7 +8,14 @@ import { Observable } from 'rxjs';
   templateUrl: './observable-view.component.html'
 })
 export class ObservableComponent implements OnInit {
-  ngOnInit() {
+  
+	constructor(public loadingService: LoadingService) { }
+
+	ngOnInit() {
+		console.log('Observable-Component 01: ngOnInit');
+
+		this.loadingService.hideLoader();
+
 		const observable = new Observable(subscriber => {
 			subscriber.next(1);
 			subscriber.next(2);
