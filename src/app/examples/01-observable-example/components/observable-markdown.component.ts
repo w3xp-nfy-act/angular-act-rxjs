@@ -5,13 +5,16 @@ import { LoadingService } from '../../../shared/services';
   selector: 'app-observable-markdown',
   template: `
   <!-- static markdown -->
-  <markdown ngPreserveWhitespaces>
-  ## Article: RxJS - Reactive Extensions Library for JavaScript
-  </markdown>
-
-  <!-- variable binding -->
-  <markdown [data]="markup"></markdown>
-
+  <ng-template [ngIf]="loadingService.isLoading() | async">
+      <!-- more elements -->
+      <markdown ngPreserveWhitespaces>
+      ## Article: RxJS - Reactive Extensions Library for JavaScript
+      </markdown>
+      
+      <!-- variable binding -->
+      <markdown [data]="markup"></markdown>
+  </ng-template>
+    
   <!-- loaded from remote url -->
   <markdown [src]="'./assets/md/observable.md'" (load)="onLoad($event)" (error)="onError($event)"></markdown>
   `,
